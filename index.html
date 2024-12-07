@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI & Tech Stocks Monitor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI & Tech Stocks Monitor</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Ticker</th>
+                <th>Price (USD)</th>
+            </tr>
+        </thead>
+        <tbody id="stock-table-body">
+            <!-- Stocks data will be inserted here -->
+        </tbody>
+    </table>
+    <script>
+        const stocks = [
+            { name: "BlackBerry Limited", ticker: "BB" },
+            { name: "Iris Energy Limited", ticker: "IREN" },
+            { name: "Globalstar, Inc.", ticker: "GSAT" },
+            { name: "SmartRent, Inc.", ticker: "SMRT" },
+            { name: "Rackspace Technology Inc.", ticker: "RXT" }
+        ];
+        async function fetchStockPrices() {
+            const response = await fetch('https://api.example.com/stock-prices'); // Replace with a real API URL
+            const data = await response.json();
+            const tableBody = document.getElementById('stock-table-body');
+            stocks.forEach(stock => {
+                const price = data[stock.ticker];
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${stock.name}</td><td>${stock.ticker}</td><td>${price}</td>`;
+                tableBody.appendChild(row);
+            });
+        }
+        fetchStockPrices();
+    </script>
+</body>
+</html>
